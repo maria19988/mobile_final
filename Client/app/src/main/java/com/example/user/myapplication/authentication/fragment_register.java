@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,10 +16,14 @@ import android.widget.ProgressBar;
 import com.example.user.myapplication.AuthenticationApiManager;
 import com.example.user.myapplication.R;
 import com.example.user.myapplication.base.BaseFragment;
+import com.example.user.myapplication.models.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class fragment_register extends BaseFragment {
