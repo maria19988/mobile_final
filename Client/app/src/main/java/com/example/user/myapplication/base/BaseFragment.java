@@ -11,7 +11,7 @@ public class BaseFragment extends Fragment
     private Gson gson = new Gson();
 
     public void showToastMessage(String text) {
-        //Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     public ApiError parseApiErrorString(String error) {
