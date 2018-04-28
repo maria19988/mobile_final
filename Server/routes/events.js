@@ -27,8 +27,9 @@ const endpoints = [
             auth: 'jwt',
             validate: {
                 payload: {
-                    name: joi.string().min(5).required(),
-                    location: joi.string().min(5).required()
+                    title: joi.string().min(5).required(),
+                    description: joi.string().min(5).required(),
+					phone:joi.string().min(5).required()
                 }
             }
         },
@@ -51,7 +52,7 @@ const endpoints = [
             auth: 'jwt',
             validate: {
                 params: {
-                    eventId: joi.string().required()
+                    jobId: joi.string().required()
                 }
             }
         },

@@ -32,6 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class fragment_login extends BaseFragment {
+    public static final String TAG = fragment_login.class.getSimpleName();
     private LoginFragmentListener listener;
     private AuthenticationApiManager authenticationApiManager;
     private LocalStorageManager localStorageManager;
@@ -134,6 +135,7 @@ public class fragment_login extends BaseFragment {
                         User apiUser = response.body();
                         localStorageManager.saveUser(apiUser);
                         listener.onLoginSuccess();
+                        showToastMessage(emailHolder.getTransitionName());
                     } else {
                         try {
                             String errorString = response.errorBody().string();

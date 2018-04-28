@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 
 const UserEventSchema = new mongoose.Schema({
-    name: {
+    title: {
         type: String,
         required: true
     },
-    location: {
+    description: {
         type: String,
         required: true
-    }
+    },
+	phone:{
+		type: String,
+		required:true
+	}
 });
 
 module.exports = UserEventSchema;

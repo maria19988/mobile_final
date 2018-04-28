@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements fragment_login.Lo
     @Override
     public void onLoginSuccess() {
         Log.d("g", "njsj");
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Main2Activity.class);
         startActivity(intent);
         finish();
     }
