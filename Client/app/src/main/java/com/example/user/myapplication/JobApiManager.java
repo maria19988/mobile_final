@@ -34,7 +34,7 @@ public class JobApiManager {
     public Call<Job> addJob(Job job) {
         return jobApi.addJob(job);
     }
-
+    public Call<Job> getJobs() {return jobApi.getJobs();}
 
 
 }

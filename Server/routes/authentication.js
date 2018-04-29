@@ -85,6 +85,17 @@ const endpoints = [
             return sanitizedUser;
 
         }
+    },
+	{
+        method: 'GET',
+        path: '/getJobs',
+        config: {
+            auth: 'jwt'
+        },
+        handler: async function (request, h) {
+            const loggedInUser = request.user;
+            return loggedInUser.jobs;
+        }
     }
 ];
 

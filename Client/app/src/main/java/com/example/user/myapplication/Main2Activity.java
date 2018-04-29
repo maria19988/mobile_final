@@ -24,16 +24,27 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        displayJobs();
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addJobFragment();
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                //addJobFragment();
+
             }
         });
-        //addJobFragment();
+
+    }
+
+    private void displayJobs() {
+        ListFragment fragment = ListFragment.newInstance();
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     public static Main2Activity newInstance() {
