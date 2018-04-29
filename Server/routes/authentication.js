@@ -6,6 +6,7 @@ const joi = require('joi');
 
 const config = require(path.resolve('config/config'));
 const User = mongoose.model('User');
+const Job = mongoose.model('Job');
 const Utils = require(path.resolve('./utils/utils'));
 
 const endpoints = [
@@ -33,6 +34,29 @@ const endpoints = [
         }
 
     },
+	{
+		method: 'POST',
+        path: '/addJob',
+        config: {
+            auth: false,
+            validate: {
+                payload: {
+                    title: joi.string().min(5).required(),
+                    description: joi.string().required(),
+                    phone: joi.string().required()
+                }
+            }
+        },
+        handler: async function (request, h) {
+            try {
+                const newJob = new Job(request.payload);
+                const result = await newJob.save();
+                return Utils.sanitizeUser(result);
+            } catch (e) {
+                return Boom.badRequest(e.message);
+            }
+        }
+	},
     {
         method: 'POST',
         path: '/login',

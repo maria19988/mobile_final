@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +103,7 @@ public class addJob extends BaseFragment {
     }
 
     @OnClick(R.id.add)
-    public void attemptRegister() {
+    public void attemptAdd() {
         String title = titleEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
         String phone = phoneEditText.getText().toString().trim();
@@ -138,8 +139,10 @@ public class addJob extends BaseFragment {
                         @Override
                         public void onResponse(Call<Job> call, Response<Job> response) {
                             hideProgressBar();
+                            Log.d(TAG, "hellooo");
                             if (response.isSuccessful()) {
                                 listener.onAddSuccess();
+                                showToastMessage(titleHolder.getTransitionName());
                             } else {
                                 listener.onAddFailure();
                             }

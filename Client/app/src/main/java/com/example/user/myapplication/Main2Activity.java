@@ -30,10 +30,10 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
                 addJobFragment();
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                addJobFragment();
+                //addJobFragment();
             }
         });
-        addJobFragment();
+        //addJobFragment();
     }
 
     public static Main2Activity newInstance() {

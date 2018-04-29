@@ -2,10 +2,6 @@ package com.example.user.myapplication.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * @author fouad
- */
-
 public class User {
 
     @SerializedName("_id")

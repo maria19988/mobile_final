@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const path = require('path');
 
-const UserEventSchema = new mongoose.Schema({
+const UserJobSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -15,4 +16,4 @@ const UserEventSchema = new mongoose.Schema({
 	}
 });
 
-module.exports = UserEventSchema;
+module.exports = mongoose.model('Job', UserJobSchema);

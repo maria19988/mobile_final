@@ -8,8 +8,10 @@ const config = require(path.resolve('config/config'));
 mongoose.connect(config.databaseUrl);
 
 require(path.resolve('./models/users'));
-
+require(path.resolve('./models/jobs'));
 const User = mongoose.model('User');
+
+const Job = mongoose.model('Job');
 
 const init = async () => {
     // Create a server with a host and port
@@ -43,12 +45,8 @@ const init = async () => {
 
     let routes = [];
     const authenticationRoutes = require(path.resolve('routes/authentication'));
-    const profileRoutes = require(path.resolve('routes/profile'));
-    const eventsRoutes = require(path.resolve('routes/events'));
 
     routes.push(authenticationRoutes);
-    routes.push(profileRoutes);
-    routes.push(eventsRoutes);
 
     routes = _.flatMapDeep(routes, (route) => {
         return route
