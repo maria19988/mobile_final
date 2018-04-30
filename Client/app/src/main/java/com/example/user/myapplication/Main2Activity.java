@@ -50,13 +50,7 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
 
             }
         });
-        Button button1=findViewById(R.id.button3);
-        /*button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                saveJob();
-            }
-        });*/
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -67,7 +61,9 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
 
     }
 
-    /*private void saveJob()
+
+
+    private void saveJob()
     {
         User user = localStorageManager.getUser();
         String title = findViewById(R.id.title_holder).toString();
@@ -94,7 +90,7 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
                     }
                 });
     }
-*/
+
     private void logout() {
         LocalStorageManager.getInstance(this).deleteUser();
         Intent intent = new Intent(this, MainActivity.class);
@@ -109,6 +105,8 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
                 .beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+
+
     }
 
     public static Main2Activity newInstance() {

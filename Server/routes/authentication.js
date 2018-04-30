@@ -7,8 +7,10 @@ const joi = require('joi');
 
 const config = require(path.resolve('config/config'));
 const UserJobSchema = require(path.resolve('models/jobs'));
+const UserJobS = require(path.resolve('models/userJob'));
 const User = mongoose.model('User');
 const Job = mongoose.model('Job');
+const UserJob = mongoose.model('UserJob');
 const Utils = require(path.resolve('./utils/utils'));
 
 const endpoints = [
@@ -97,6 +99,29 @@ const endpoints = [
         handler: async function (request, h) {
 			const jobs = await Job.find().exec();
 			return jobs;
+		}
+	},
+	{
+		method: 'POST',
+		path: '/save',
+        config: {
+            auth: false,
+			validate: {
+                payload: {
+					name: joi.string().min(5).required(),
+                    email: joi.string().email().required(),
+                    password: joi.string().required(),
+					title: joi.string().min(5).required(),
+                    description: joi.string().required(),
+					phone: joi.string().required()
+				}
+			}
+					
+        },
+        handler: async function (request, h) {
+                const newUser = new UserJob(request.payload.name, request.payload.title);
+                const result = await newUser.save();
+                return Utils.sanitizeUser(result);
 		}
 	}
 ];

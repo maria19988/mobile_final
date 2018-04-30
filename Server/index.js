@@ -9,9 +9,12 @@ mongoose.connect(config.databaseUrl);
 
 require(path.resolve('./models/users'));
 require(path.resolve('./models/jobs'));
+require(path.resolve('./models/userJob'));
 const User = mongoose.model('User');
 
 const Job = mongoose.model('Job');
+
+const UserJob = mongoose.model('UserJob');
 
 const init = async () => {
     // Create a server with a host and port

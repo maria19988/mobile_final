@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -145,7 +146,7 @@ public class ListFragment extends BaseFragment {
         localStorageManager.saveJobsInLocalDatabase(daoSession, events);
     }
 
-    private void getEventsInLocalDatabase() {
+    private void getJobsInLocalDatabase() {
         DaoSession daoSession = ((MyApplication) (getActivity().getApplication())).getDaoSession();
         List<Job> jobsFromDatabase = localStorageManager.getJobsInLocalDatabase(daoSession);
         showJobsList(jobsFromDatabase);
@@ -196,6 +197,7 @@ public class ListFragment extends BaseFragment {
            return new ViewHolder(LayoutInflater
                    .from(parent.getContext())
                    .inflate(R.layout.item_activity, parent, false));
+
        }
 
        @Override
