@@ -37,6 +37,7 @@ public class ListFragment extends BaseFragment {
     public static final String TAG = ListFragment.class.getSimpleName();
     private ListFragmentListener lListener;
     private JobApiManager jobApiManager;
+    JobsListAdapter jobsListAdapter;
     //private AuthenticatedApiManager authenticatedApiManager;
     private LocalStorageManager localStorageManager;
     private RecyclerView recyclerView;
@@ -78,6 +79,8 @@ public class ListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
+        RecyclerView jobsList = (RecyclerView) view.findViewById(R.id.list);
+        jobsList.setAdapter(jobsListAdapter);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -85,10 +88,13 @@ public class ListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        JobsListAdapter jobsListAdapter;
         setupRecyclerView();
     }
 
     private void setupRecyclerView() {
+        //jobsList.setLayoutManager(new LinearLayoutManager(getActivity()));
         jobsList.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
@@ -168,55 +174,57 @@ public class ListFragment extends BaseFragment {
         lListener = null;
     }
 
-   // @Override
+
+
+    // @Override
    /* public void notLoggedInAnymore() {
         if (lListener != null) {
             lListener.onErrorFetchingEvents();
         }
     }
 */
-    class JobsListAdapter extends RecyclerView.Adapter<JobsListAdapter.ViewHolder> {
+   class JobsListAdapter extends RecyclerView.Adapter<JobsListAdapter.ViewHolder> {
 
-        private List<Job> jobs;
+       private List<Job> jobs;
 
-        JobsListAdapter(List<Job> jobs) {
-            this.jobs = jobs;
-        }
+       JobsListAdapter(List<Job> jobs) {
+           this.jobs = jobs;
+       }
 
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(LayoutInflater
-                    .from(parent.getContext())
-                    .inflate(R.layout.item_activity, parent, false));
-        }
+       @Override
+       public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+           return new ViewHolder(LayoutInflater
+                   .from(parent.getContext())
+                   .inflate(R.layout.item_activity, parent, false));
+       }
 
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            Job job = jobs.get(position);
-            holder.titleTextView.setText(job.getTitle());
-            holder.descriptionTextView.setText(job.getDescription());
-            holder.phoneTextView.setText(job.getPhone());
-        }
+       @Override
+       public void onBindViewHolder(ViewHolder holder, int position) {
+           Job job = jobs.get(position);
+           holder.titleTextView.setText(job.getTitle());
+           holder.descriptionTextView.setText(job.getDescription());
+           holder.phoneTextView.setText(job.getPhone());
+       }
 
-        @Override
-        public int getItemCount() {
-            return jobs.size();
-        }
+       @Override
+       public int getItemCount() {
+           return jobs.size();
+       }
 
-        class ViewHolder extends RecyclerView.ViewHolder {
+       class ViewHolder extends RecyclerView.ViewHolder {
 
-            @BindView(R.id.title_holder)
-            TextView titleTextView;
-            @BindView(R.id.description_holder)
-            TextView descriptionTextView;
-            @BindView(R.id.phone_holder)
-            TextView phoneTextView;
-            public ViewHolder(View itemView) {
-                super(itemView);
-                ButterKnife.bind(this, itemView);
-            }
-        }
-    }
+           @BindView(R.id.title_holder)
+           TextView titleTextView;
+           @BindView(R.id.description_holder)
+           TextView descriptionTextView;
+           @BindView(R.id.phone_holder)
+           TextView phoneTextView;
+           public ViewHolder(View itemView) {
+               super(itemView);
+               ButterKnife.bind(this, itemView);
+           }
+       }
+   }
 
 
     public interface ListFragmentListener {

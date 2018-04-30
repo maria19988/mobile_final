@@ -8,10 +8,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.user.myapplication.addJob;
+import com.example.user.myapplication.authentication.fragment_register;
 import com.example.user.myapplication.base.BaseFragment;
+import com.example.user.myapplication.local.LocalStorageManager;
 
 public class Main2Activity extends AppCompatActivity implements addJob.AddFragmentListener,  ListFragment.ListFragmentListener {
     String hello = "hio";
@@ -23,6 +26,7 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        Button button = findViewById(R.id.button);
 
         displayJobs();
 
@@ -30,12 +34,25 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
             @Override
             public void onClick(View view) {
                 addJobFragment();
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Add Job", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
             }
         });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                logout();
+            }
 
+        });
+
+    }
+    private void logout() {
+        LocalStorageManager.getInstance(this).deleteUser();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void displayJobs() {
@@ -58,14 +75,13 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, fragment)
+                .addToBackStack(addJob.TAG)
                 .commit();
     }
 
     @Override
     public void onAddSuccess() {
-        Intent intent = new Intent(this, Main2Activity.class);
-        startActivity(intent);
-        finish();
+        getFragmentManager().popBackStack();
     }
     @Override
     public void onAddFailure() {
