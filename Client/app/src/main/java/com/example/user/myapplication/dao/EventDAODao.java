@@ -60,8 +60,10 @@ public class EventDAODao extends AbstractDao<EventDAO, String> {
         if (id != null) {
             stmt.bindString(1, id);
         }
-        stmt.bindString(2, entity.getName());
-        stmt.bindString(3, entity.getLocation());
+        stmt.bindString(2, entity.getTitle());
+        stmt.bindString(3, entity.getDescription());
+        stmt.bindString(3, entity.getPhone());
+
     }
 
     @Override
@@ -72,8 +74,9 @@ public class EventDAODao extends AbstractDao<EventDAO, String> {
         if (id != null) {
             stmt.bindString(1, id);
         }
-        stmt.bindString(2, entity.getName());
-        stmt.bindString(3, entity.getLocation());
+        stmt.bindString(2, entity.getTitle());
+        stmt.bindString(3, entity.getDescription());
+        stmt.bindString(3, entity.getPhone());
     }
 
     @Override
@@ -86,7 +89,8 @@ public class EventDAODao extends AbstractDao<EventDAO, String> {
         EventDAO entity = new EventDAO( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // id
             cursor.getString(offset + 1), // name
-            cursor.getString(offset + 2) // location
+            cursor.getString(offset + 2), // location
+                cursor.getString(offset + 3) // location
         );
         return entity;
     }
@@ -94,8 +98,9 @@ public class EventDAODao extends AbstractDao<EventDAO, String> {
     @Override
     public void readEntity(Cursor cursor, EventDAO entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setName(cursor.getString(offset + 1));
-        entity.setLocation(cursor.getString(offset + 2));
+        entity.setTitle(cursor.getString(offset + 1));
+        entity.setDescription(cursor.getString(offset + 2));
+        entity.setPhone(cursor.getString(offset + 3));
      }
     
     @Override

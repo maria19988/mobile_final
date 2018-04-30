@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,12 @@ import retrofit2.Response;
 
 public class ListFragment extends BaseFragment {
 
+    public static final String TAG = ListFragment.class.getSimpleName();
     private ListFragmentListener lListener;
     private JobApiManager jobApiManager;
+    //private AuthenticatedApiManager authenticatedApiManager;
     private LocalStorageManager localStorageManager;
+    private RecyclerView recyclerView;
 
     @BindView(R.id.list)
     RecyclerView jobsList;
@@ -56,9 +60,12 @@ public class ListFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //jobApiManager = JobApiManager.getInstance();
         jobApiManager = JobApiManager.getInstance();
         localStorageManager = LocalStorageManager.getInstance(getActivity());
+       // fetchAllJobs();
     }
+
 
     @Override
     public void onResume() {
@@ -87,6 +94,7 @@ public class ListFragment extends BaseFragment {
 
     private void showJobsList(List<Job> jobs) {
         jobsList.setAdapter(new JobsListAdapter(jobs));
+
     }
 
     private void showProgressBar() {
@@ -94,19 +102,23 @@ public class ListFragment extends BaseFragment {
     }
 
     private void fetchAllJobs() {
-        jobApiManager.getJobs()
-                .enqueue(new Callback<Job>() {
+        Log.d(TAG, "HOLO");
+        jobApiManager
+                .getJobs()
+                .enqueue(new Callback<List<Job>>() {
                     @Override
-                    public void onResponse(Call<Job> call, Response<Job> response) {
+                    public void onResponse(Call<List<Job>> call, Response<List<Job>> response) {
                         hideProgressBar();
+                        Log.d(TAG,"holo");
                         if(response.isSuccessful()){
                             List<Job> jobs = (List<Job>) response.body();
+                            Log.d(TAG,"SEND HELP");
                             showJobsList(jobs);
                         }else{
                             try {
                                 String errorJson = response.errorBody().string();
                                 ApiError apiError = parseApiErrorString(errorJson);
-                                //actBasedOnApiErrorCode(apiError);
+                                actBasedOnApiErrorCode(apiError);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -114,7 +126,7 @@ public class ListFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onFailure(Call<Job> call, Throwable t) {
+                    public void onFailure(Call<List<Job>> call, Throwable t) {
                         hideProgressBar();
                     }
                 });
@@ -122,27 +134,22 @@ public class ListFragment extends BaseFragment {
 
     }
 
-    /*private void saveEventsInLocalDatabase(List<Job> events) {
+    private void saveJobsInLocalDatabase(List<Job> events) {
         DaoSession daoSession = ((MyApplication) (getActivity().getApplication())).getDaoSession();
-        localStorageManager.saveEventsInLocalDatabase(daoSession, events);
-    }*/
-
-    /*private void getEventsInLocalDatabase() {
-        DaoSession daoSession = ((MyApplication) (getActivity().getApplication())).getDaoSession();
-        List<Event> eventsFromDatabase = localStorageManager.getEventsInLocalDatabase(daoSession);
-        showEventsList(eventsFromDatabase);
+        localStorageManager.saveJobsInLocalDatabase(daoSession, events);
     }
-*/
+
+    private void getEventsInLocalDatabase() {
+        DaoSession daoSession = ((MyApplication) (getActivity().getApplication())).getDaoSession();
+        List<Job> jobsFromDatabase = localStorageManager.getJobsInLocalDatabase(daoSession);
+        showJobsList(jobsFromDatabase);
+    }
+
     private void hideProgressBar() {
         progressBar.setVisibility(View.INVISIBLE);
     }
 
-    @OnClick(R.id.new_event)
-    public void requestShowNewJobPage() {
-        if (lListener != null) {
-            lListener.onRequestCreateNewJob();
-        }
-    }
+
 
     @Override
     public void onAttach(Context context) {

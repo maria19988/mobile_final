@@ -90,12 +90,13 @@ const endpoints = [
         method: 'GET',
         path: '/getJobs',
         config: {
-            auth: 'jwt'
+            auth: false
+            
         },
         handler: async function (request, h) {
-            const loggedInUser = request.user;
-            return loggedInUser.jobs;
-        }
+            const loggedInUser = request.jobs;
+			return Job;
+		}
     }
 ];
 

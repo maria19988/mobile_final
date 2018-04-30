@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.user.myapplication.addJob;
 import com.example.user.myapplication.base.BaseFragment;
 
-public class Main2Activity extends AppCompatActivity implements addJob.AddFragmentListener{
+public class Main2Activity extends AppCompatActivity implements addJob.AddFragmentListener,  ListFragment.ListFragmentListener {
     String hello = "hio";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,4 +74,13 @@ public class Main2Activity extends AppCompatActivity implements addJob.AddFragme
     }
 
 
+    @Override
+    public void onRequestCreateNewJob() {
+
+    }
+
+    @Override
+    public void onErrorFetchingJobs() {
+
+    }
 }

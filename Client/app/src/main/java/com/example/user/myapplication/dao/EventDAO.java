@@ -11,15 +11,19 @@ public class EventDAO {
     private String id;
 
     @NotNull
-    private String name;
+    private String title;
     @NotNull
-    private String location;
+    private String description;
+    @NotNull
+    private String phone;
 
     @Generated(hash = 1184884408)
-    public EventDAO(String id, @NotNull String name, @NotNull String location) {
+    public EventDAO(String id, @NotNull String title, @NotNull String description, @NotNull String phone) {
         this.id = id;
-        this.name = name;
-        this.location = location;
+        this.title = title;
+        this.description = description;
+        this.phone = phone;
+
     }
 
     @Generated(hash = 1645973274)
@@ -34,20 +38,27 @@ public class EventDAO {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getTitle() {
+        return this.title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = title;
     }
 
-    public String getLocation() {
-        return this.location;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setDescription( String description) {
+        this.description = description;
+    }
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public void setPhone( String phone) {
+        this.phone = phone;
     }
 
 

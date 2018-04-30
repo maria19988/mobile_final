@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.user.myapplication.Constants;
 import com.example.user.myapplication.local.LocalStorageManager;
 //import com.example.myevents.models.Event;
+import com.example.user.myapplication.models.Job;
 import com.example.user.myapplication.models.User;
 
 import com.example.user.myapplication.Constants;
@@ -69,7 +70,13 @@ public class AuthenticatedApiManager {
     /*public Call<List<Event>> getEvents() {
         return authenticationApi.getEvents();
     }
+
 */
+
+  //  public Call<List<Job>> getJobs() {return authenticationApi.getJobs();}
+
+
+
     private class AuthInterceptor implements Interceptor {
 
         @Override

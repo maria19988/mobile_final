@@ -1,6 +1,7 @@
 package com.example.user.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -100,6 +101,7 @@ public class addJob extends BaseFragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
+
     }
 
     @OnClick(R.id.add)

@@ -41,5 +41,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'com.nabinbhandari.android:permissions:3.5'
+
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     //compile 'com.github.jkwiecien:EasyImage:2.0.4'
 }

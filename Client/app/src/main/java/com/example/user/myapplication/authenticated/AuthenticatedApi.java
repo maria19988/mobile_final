@@ -1,6 +1,7 @@
 package com.example.user.myapplication.authenticated;
 
 //import com.example.myevents.models.Event;
+import com.example.user.myapplication.models.Job;
 import com.example.user.myapplication.models.User;
 import com.example.user.myapplication.models.User;
 
@@ -17,9 +18,9 @@ public interface AuthenticatedApi {
     @GET("profile")
     Call<User> getProfile();
 
-    /*@POST("events")
-    Call<List<Event>> createNewEvent(@Body Event event);
+    /*@POST("getJobs")
+    Call<List<Event>> createNewEvent(@Body Event event);*/
 
-    @GET("events")
-    Call<List<Event>> getEvents();*/
+    /*@GET("getJobs")
+    Call<List<Job>> getJobs();*/
 }

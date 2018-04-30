@@ -3,6 +3,8 @@ package com.example.user.myapplication;
 import com.example.user.myapplication.models.Job;
 import com.example.user.myapplication.models.User;
 
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -34,7 +36,7 @@ public class JobApiManager {
     public Call<Job> addJob(Job job) {
         return jobApi.addJob(job);
     }
-    public Call<Job> getJobs() {return jobApi.getJobs();}
+    public Call<List<Job>> getJobs() {return jobApi.getJobs();}
 
 
 }

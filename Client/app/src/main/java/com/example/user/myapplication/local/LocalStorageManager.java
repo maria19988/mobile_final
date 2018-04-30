@@ -14,6 +14,7 @@ import com.example.user.myapplication.dao.EventDAODao;
 //import com.example.myevents.models.dao.EventDAO;
 //import com.example.myevents.models.dao.EventDAODao;
 //import com.example.user.myapplication.dao.EventDAO;
+import com.example.user.myapplication.models.Job;
 import com.example.user.myapplication.models.User;
 import com.google.gson.Gson;
 
@@ -67,26 +68,27 @@ public class LocalStorageManager {
                 .commit();
     }
 
-    /*public void saveEventsInLocalDatabase(DaoSession daoSession, List<Event> events) {
+    public void saveJobsInLocalDatabase(DaoSession daoSession, List<Job> jobs) {
         EventDAODao eventDao = daoSession.getEventDAODao();
-        for (int i = 0; i < events.size(); i++) {
+        for (int i = 0; i < jobs.size(); i++) {
             EventDAO eventdao = new EventDAO();
-            eventdao.setId(events.get(i).getId());
-            eventdao.setName(events.get(i).getName());
-            eventdao.setLocation(events.get(i).getLocation());
+            eventdao.setId(jobs.get(i).getId());
+            eventdao.setTitle(jobs.get(i).getTitle());
+            eventdao.setDescription(jobs.get(i).getDescription());
+            eventdao.setPhone(jobs.get(i).getPhone());
             eventDao.insertOrReplace(eventdao);
         }
     }
 
-    public List<Event> getEventsInLocalDatabase(DaoSession daoSession) {
+    public List<Job> getJobsInLocalDatabase(DaoSession daoSession) {
         EventDAODao eventDao = daoSession.getEventDAODao();
         List<EventDAO> eventDAOS = eventDao.loadAll();
-        List<Event> events = new ArrayList<>();
+        List<Job> jobs = new ArrayList<>();
         for (int i = 0; i < eventDAOS.size(); i++) {
-            events.add(new Event(eventDAOS.get(i).getName(), eventDAOS.get(i).getLocation()));
+            jobs.add(new Job(eventDAOS.get(i).getTitle(), eventDAOS.get(i).getDescription(), eventDAOS.get(i).getPhone()));
         }
-        return events;
-    }*/
+        return jobs;
+    }
 
 
 }
