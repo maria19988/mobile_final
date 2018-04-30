@@ -2,6 +2,8 @@ package com.example.user.myapplication.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User {
 
     @SerializedName("_id")
@@ -10,11 +12,18 @@ public class User {
     private String email;
     private String password;
     private String token;
+    private List<Job> jobs;
 
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+    public User(String name, String email, String password, List<Job> jobs) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.jobs = jobs;
     }
 
     public User(String email, String password) {
@@ -60,5 +69,13 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
     }
 }

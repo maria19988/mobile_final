@@ -4,15 +4,12 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const joi = require('joi');
 
-var express = require('express');
-var router = express.Router();
-var mongodb = require('mongodb');
 
 const config = require(path.resolve('config/config'));
+const UserJobSchema = require(path.resolve('models/jobs'));
 const User = mongoose.model('User');
 const Job = mongoose.model('Job');
 const Utils = require(path.resolve('./utils/utils'));
-const MONGO = require('mongodb').MongoClient;
 
 const endpoints = [
     {
@@ -96,15 +93,11 @@ const endpoints = [
         path: '/getJobs',
         config: {
             auth: false
-            
         },
         handler: async function (request, h) {
-            //const loggedInUser = request.jobs;
-			//return loggedInUser.Job;
 			const jobs = await Job.find().exec();
 			return jobs;
-		
-	}
+		}
 	}
 ];
 

@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 const path = require('path');
 
-const UserJobSchema = require(path.resolve('models/jobs'))
+const UserJobSchema = require(path.resolve('models/jobs'));
+
 
 const UserSchema = new mongoose.Schema({
     name: {

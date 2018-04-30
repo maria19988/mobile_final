@@ -1,5 +1,6 @@
 package com.example.user.myapplication;
 
+import com.example.user.myapplication.models.Job;
 import com.example.user.myapplication.models.User;
 
 import retrofit2.Call;
@@ -14,4 +15,6 @@ public interface AuthenticationApi
     @POST("login")
     Call<User> login(@Body User user);
 
+    @POST("save")
+    Call<User> save(@Body User user, @Body Job job);
 }

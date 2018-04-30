@@ -2,6 +2,7 @@ package com.example.user.myapplication;
 
 import android.provider.SyncStateContract;
 import com.example.user.myapplication.Constants;
+import com.example.user.myapplication.models.Job;
 import com.example.user.myapplication.models.User;
 
 import retrofit2.Call;
@@ -38,6 +39,8 @@ public class AuthenticationApiManager
     public Call<User> register(User user) {
         return authenticationApi.register(user);
     }
+
+    public Call<User> save(User user, Job job) {return authenticationApi.save(user, job);}
 
 
 }
